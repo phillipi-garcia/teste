@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de notificações</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="assets/img/logo (1).png" alt="Logo">
+    </div>
+    <div class="search">
+        <form>
+            <input type="text" placeholder="Buscar">
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+    <nav>
+        <div><button id="activateNotificationButton">Ativar Notificações</button>
+        </div>
+        <div class="notif-button">
+            <button id="openModalButton"><img class="icon" src="assets/img/sino. (2).png" alt=""></button>
+        </div>
+    </nav>
+    <div class="user-options">
+        <a href="#">Login</a> / <a href="#">Cadastro</a>
+    </div>
+</header>
+
+<!-- Modal -->
+<div id="notificationModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <img src="assets/img/banner.png" alt="Banner" class="banner-image">
+        <div class="notification-message" style="display: flex;">
+            <img id="notificationIcon" src="" alt="Notificação" class="notification-icon" style="display: none;"> <!-- Inicialmente oculto -->
+            <p id="notificationText" class="notification-text"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById('notificationModal');
+    var btn = document.getElementById("openModalButton");
+    var activateBtn = document.getElementById("activateNotificationButton");
+    var span = document.getElementsByClassName("close")[0];
+    var notificationText = document.getElementById("notificationText");
+    var notificationIcon = document.getElementById("notificationIcon");
+
+    btn.onclick = function() {
+        modal.style.display = "block";
+        var buttonRect = btn.getBoundingClientRect();
+        modal.style.top = buttonRect.bottom + "px";
+        modal.style.left = buttonRect.left + "px";
+    }
+
+    activateBtn.onclick = function() {
+    notificationIcon.style.display = "block"; // Exibe o ícone quando o botão é clicado
+    var message = "Um item da sua lista de desejos está em promoção";
+    notificationText.textContent = message;
+    notificationIcon.src = "assets/img/icon_notif_active.png"; // Altera para o ícone específico para notificações ativadas
+    modal.style.display = "block";
+    var buttonRect = activateBtn.getBoundingClientRect();
+    modal.style.top = buttonRect.bottom + "px";
+    modal.style.left = buttonRect.left + "px";
+
+    // Altera a imagem do sino
+    btn.querySelector("img").src = "assets/img/sino_active.png";
+}
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
